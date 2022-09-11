@@ -3,6 +3,9 @@ project ("Aito_Vulkan")
 
 set(SOURCES
 	"main.cpp"
+    "aito.h"
+    "logger.h"
+    "logger.cpp"
 )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
