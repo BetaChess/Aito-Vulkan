@@ -1,9 +1,7 @@
 #ifndef AITO_CAMERA_H
 #define AITO_CAMERA_H
 
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
-#include <glm/glm.hpp>
+#include "vecmath.h"
 
 
 namespace aito
@@ -16,16 +14,16 @@ namespace aito
 		void setOrthographicProjection(float left, float right, float top, float bottom, float near, float far);
 		void setPerspectiveProjection(float fovy, float aspect, float near, float far);
 
-		void setViewDirection(glm::vec3 position, glm::vec3 direction, glm::vec3 up = glm::vec3(0.0f, -1.0f, 0.0f));
-		void setViewTarget(glm::vec3 position, glm::vec3 target, glm::vec3 up = glm::vec3(0.0f, -1.0f, 0.0f));
-		void setViewYXZ(glm::vec3 position, glm::vec3 rotation);
+		void setViewDirection(Point3f position, Vec3f direction, Vec3f up = Vec3f(0.0f, -1.0f, 0.0f));
+		void setViewTarget(Point3f position, Point3f target, Vec3f up = Vec3f(0.0f, -1.0f, 0.0f));
+		void setViewYXZ(Point3f position, Vec3f rotation);
 
-		inline const glm::mat4& getProjection() const { return projectionMatrix_; };
-		inline const glm::mat4& getView() const { return viewMatrix_; };
+		inline const Mat4f& getProjection() const { return projectionMatrix_; };
+		inline const Mat4f& getView() const { return viewMatrix_; };
 
 	private:
-		glm::mat4 projectionMatrix_{ 1.0f };
-		glm::mat4 viewMatrix_{ 1.0f };
+		Mat4f projectionMatrix_{ 1.0f };
+		Mat4f viewMatrix_{ 1.0f };
 	};
 }
 

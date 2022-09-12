@@ -3,10 +3,7 @@
 #include "point_light_system.h"
 #include "time.h"
 
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
-#include <glm/glm.hpp>
-#include <glm/gtc/constants.hpp>
+#include "vecmath.h"
 
 #include <stdexcept>
 #include <array>

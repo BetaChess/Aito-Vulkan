@@ -8,11 +8,7 @@
 #include "point_light_system.h"
 #include "time.h"
 
-
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
-#include <glm/glm.hpp>
-#include <glm/gtc/constants.hpp>
+#include "vecmath.h"
 
 #include <stdexcept>
 #include <array>
@@ -23,11 +19,11 @@ namespace aito
 {
 	struct GlobalUbo
 	{
-		glm::mat4 projection{ 1.0f };
-		glm::mat4 view{ 1.0f };
-		glm::vec4 ambientLightColor{ 1.0f, 1.0f, 1.0f, 0.02f };
-		glm::vec3 lightPosition{ -0.4f, -1.0f, -1.2f };
-		alignas(16) glm::vec4 lightColor{ 0.29019607843137254901960784313725f, 0.25490196078431372549019607843137f, 0.16470588235294117647058823529412f, 0.7f };
+		Mat4f projection{ 1.0f };
+		Mat4f view{ 1.0f };
+		Vec4f ambientLightColor{ 1.0f, 1.0f, 1.0f, 0.02f };
+		Point3f lightPosition{ -0.4f, -1.0f, -1.2f };
+		alignas(16) Vec4f lightColor{ 0.29019607843137254901960784313725f, 0.25490196078431372549019607843137f, 0.16470588235294117647058823529412f, 0.7f };
 	};
 
 	Application::Application()
@@ -140,7 +136,7 @@ namespace aito
 			Object object;
 			object.model = model;
 			object.transform.translation = { -0.8f, 0.0f, 0.0f };
-			object.transform.scale = glm::vec3(3);
+			object.transform.scale = Vec3f(3);
 			//object.transform.rotation.x = 0.1f * glm::two_pi<float>();
 
 			objects_.push_back(std::move(object));
@@ -151,7 +147,7 @@ namespace aito
 			Object object;
 			object.model = model;
 			object.transform.translation = { 0.8f, 0.0f, 0.0f };
-			object.transform.scale = glm::vec3(3);
+			object.transform.scale = Vec3f(3);
 			//object.transform.rotation.x = 0.1f * glm::two_pi<float>();
 
 			objects_.push_back(std::move(object));
@@ -162,7 +158,7 @@ namespace aito
 			Object object;
 			object.model = model;
 			object.transform.translation = { 0.0f, 0.0f, 0.0f };
-			object.transform.scale = glm::vec3{ 3.0f, 1.0f, 3.0f };
+			object.transform.scale = Vec3f{ 3.0f, 1.0f, 3.0f };
 			//object.transform.rotation.x = 0.1f * glm::two_pi<float>();
 
 			objects_.push_back(std::move(object));

@@ -1,12 +1,14 @@
 #include "pch.h"
 
+#include "vecmath.h"
+
 #include "transform.h"
 
 
 namespace aito
 {
 
-glm::mat4 Transform::mat4() const
+Mat4f Transform::mat4() const
 {
     const float c3 = glm::cos(rotation.z);
     const float s3 = glm::sin(rotation.z);
@@ -14,7 +16,7 @@ glm::mat4 Transform::mat4() const
     const float s2 = glm::sin(rotation.x);
     const float c1 = glm::cos(rotation.y);
     const float s1 = glm::sin(rotation.y);
-    return glm::mat4{
+    return Mat4f{
         {
             scale.x * (c1 * c3 + s1 * s2 * s3),
             scale.x * (c2 * s3),
@@ -36,7 +38,7 @@ glm::mat4 Transform::mat4() const
         {translation.x, translation.y, translation.z, 1.0f} };
 }
 
-glm::mat3 Transform::normalMatrix() const
+Mat3f Transform::normalMatrix() const
 {
     const float c3 = glm::cos(rotation.z);
     const float s3 = glm::sin(rotation.z);
@@ -44,9 +46,9 @@ glm::mat3 Transform::normalMatrix() const
     const float s2 = glm::sin(rotation.x);
     const float c1 = glm::cos(rotation.y);
     const float s1 = glm::sin(rotation.y);
-    const glm::vec3 invScale = 1.0f / scale;
+    const Vec3f invScale = 1.0f / scale;
 
-    return glm::mat3{
+    return Mat3f{
         {
             invScale.x * (c1 * c3 + s1 * s2 * s3),
             invScale.x * (c2 * s3),

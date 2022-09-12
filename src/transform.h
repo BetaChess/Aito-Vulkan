@@ -1,21 +1,21 @@
 #ifndef AITO_TRANSFORM_H
 #define AITO_TRANSFORM_H
 
-#include <glm/gtc/matrix_transform.hpp>
+#include "vecmath.h"
 
 namespace aito
 {
 
 struct Transform
 {
-	glm::vec3 translation{};
-	glm::vec3 scale{ 1.0f, 1.0f, 1.0f };
+	Vec3f translation{};
+	Vec3f scale{ 1.0f, 1.0f, 1.0f };
 
 
-	glm::mat4 mat4() const;
-	glm::mat3 normalMatrix() const;
+	Mat4f mat4() const;
+	Mat3f normalMatrix() const;
 
-	glm::vec3 rotation{};
+	Vec3f rotation{};
 };
 
 }

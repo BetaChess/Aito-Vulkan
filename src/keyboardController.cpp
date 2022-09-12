@@ -7,7 +7,7 @@ namespace aito
 	void KeyboardController::moveInPlaneXZ(GLFWwindow* window, float dt, Object& object)
 	{
 		// ROTATION
-		glm::vec3 rotate{ 0.0f };
+		Vec3f rotate{ 0.0f };
 
 		if (glfwGetKey(window, keys.lookRight) == GLFW_PRESS)
 			rotate.y += 1.0f;
@@ -26,11 +26,11 @@ namespace aito
 
 		// MOVEMENT
 		float yaw = object.transform.rotation.y;
-		const glm::vec3 forward{ sin(yaw), 0.0f, cos(yaw) };
-		const glm::vec3 right{ forward.z, 0.0f, -forward.x };
-		const glm::vec3 up{ 0.0f, -1.0f, 0.0f };
+		const Vec3f forward{ sin(yaw), 0.0f, cos(yaw) };
+		const Vec3f right{ forward.z, 0.0f, -forward.x };
+		const Vec3f up{ 0.0f, -1.0f, 0.0f };
 
-		glm::vec3 move{ 0.0f };
+		Vec3f move{ 0.0f };
 		if (glfwGetKey(window, keys.moveForward) == GLFW_PRESS)
 			move += forward;
 		if (glfwGetKey(window, keys.moveBackward) == GLFW_PRESS)

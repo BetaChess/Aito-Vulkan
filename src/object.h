@@ -13,7 +13,7 @@ class Object
 public:
 	// NOTE: change to shape
 	std::shared_ptr<Model> model{};
-	glm::vec3 color{};
+	Vec3f color{};
 	Transform transform{};
 
 };

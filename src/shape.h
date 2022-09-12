@@ -4,9 +4,7 @@
 #include "device.h"
 #include "buffer.h"
 
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
-#include <glm/glm.hpp>
+#include "vecmath.h"
 
 #include <vector>
 #include <memory>
@@ -22,9 +20,9 @@ public:
 	// Public structs
 	struct Vertex
 	{
-		glm::vec3 position{};
-		glm::vec3 color{};
-		glm::vec3 normal{};
+		Point3f position{};
+		Vec3f color{};
+		Vec3f normal{};
 		glm::vec2 uv{};
 
 		static std::vector<VkVertexInputBindingDescription> getBindingDescriptions();

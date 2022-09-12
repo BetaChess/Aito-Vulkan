@@ -3,10 +3,7 @@
 #include "simple_render_system.h"
 #include "time.h"
 
-#define GLM_FORCE_RADIANS
-#define GLM_FORCE_DEPTH_ZERO_TO_ONE
-#include <glm/glm.hpp>
-#include <glm/gtc/constants.hpp>
+#include "vecmath.h"
 
 #include <stdexcept>
 #include <array>
@@ -17,8 +14,8 @@ namespace aito
 {
 	struct SimplePushConstantData
 	{
-		glm::mat4 modelMatrix{ 1.0f };
-		glm::mat4 normalMatrix{ 1.0f };
+		Mat4f modelMatrix{ 1.0f };
+		Mat4f normalMatrix{ 1.0f };
 	};
 
 	SimpleRenderSystem::SimpleRenderSystem(Device& device, VkRenderPass renderPass, VkDescriptorSetLayout globalSetLayout)
