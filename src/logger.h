@@ -1,12 +1,15 @@
-#ifndef ERROR_H
-#define ERROR_H
+#ifndef AITO_LOGGER_H
+#define AITO_LOGGER_H
 
 // Set the logger to log all, so aito can decide what to log itself.
-#define SPDLOG_ACTIVE_LEVEL 0
+#define SPDLOG_ACTIVE_LEVEL 1
 
 
 #include <memory>
+
 #include <spdlog/spdlog.h>
+#undef near
+#undef far
 
 
 
@@ -34,5 +37,5 @@ public:
 
 
 
-#endif 
+#endif // AITO_LOGGER_H
 
