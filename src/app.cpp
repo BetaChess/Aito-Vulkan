@@ -6,6 +6,7 @@
 #include "camera.h"
 #include "simple_render_system.h"
 #include "point_light_system.h"
+#include "bounding_box_render_system.h"
 #include "time.h"
 
 #include "vecmath.h"
@@ -46,11 +47,11 @@ namespace aito
 		for (auto& bufferPtr : uniformBuffers)
 		{
 			bufferPtr = std::make_unique<Buffer>(device_,
-				sizeof(GlobalUbo),
-				Swapchain::MAX_FRAMES_IN_FLIGHT,
-				VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
-				VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
-				device_.properties.limits.minUniformBufferOffsetAlignment);
+												 sizeof(GlobalUbo),
+												 Swapchain::MAX_FRAMES_IN_FLIGHT,
+												 VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+												 VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT,
+												 device_.properties.limits.minUniformBufferOffsetAlignment);
 			bufferPtr->map();
 		}
 
@@ -69,6 +70,7 @@ namespace aito
 
 		SimpleRenderSystem simpleRenderSystem{ device_, renderer_.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout() };
 		PointLightSystem pointLightSystem{ device_, renderer_.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout() };
+		BoundingBoxRenderSystem boundingBoxSystem{ device_, renderer_.getSwapChainRenderPass(), globalSetLayout->getDescriptorSetLayout() };
 
 		Camera camera{};
 		Object viewerObject;
@@ -79,6 +81,26 @@ namespace aito
 		Time time;
 
 		float currRot = 0;
+
+		// !!!!!!!!!!!!!!!!!!!! TEMP !!!!!!!!!!!!!!!!!!!!!!!!!!
+		std::vector<BoundingBoxObject> boundingBoxes;
+		std::array<BoundingBox::Vertex, 8> vertices = 
+		{
+			BoundingBox::Vertex({-0.5f, -0.5f, 0.5f }),
+			BoundingBox::Vertex({ 0.5f, -0.5f, 0.5f }),
+			BoundingBox::Vertex({ -0.5f, 0.5f, 0.5f }),
+			BoundingBox::Vertex({0.5f, 0.5f, 0.5f}),
+			BoundingBox::Vertex({-0.5f, -0.5f, -0.5f}),
+			BoundingBox::Vertex({0.5f, -0.5f, -0.5f}),
+			BoundingBox::Vertex({-0.5f, 0.5f, -0.5f}),
+			BoundingBox::Vertex({0.5f, 0.5f, -0.5f})
+		};
+		BoundingBoxObject boundingBoxObject;
+		boundingBoxObject.model = std::make_shared<BoundingBox>(device_, vertices);
+		boundingBoxObject.transform.translation = { 0.0f, 0.0f, 0.0f };
+		boundingBoxObject.transform.scale = { 1.0f, 1.0f, 1.0f };
+		boundingBoxObject.transform.rotation = { 0.0f, 0.0f, 0.0f };
+		boundingBoxes.push_back(boundingBoxObject);
 
 		while (!window_.shouldClose())
 		{
@@ -119,6 +141,7 @@ namespace aito
 				renderer_.beginSwapChainRenderPass(commandBuffer);
 				simpleRenderSystem.renderObjects(frameInfo, objects_);
 				pointLightSystem.renderObjects(frameInfo);
+				boundingBoxSystem.renderObjects(frameInfo, boundingBoxes);
 				renderer_.endSwapChainRenderPass(commandBuffer);
 				renderer_.endFrame();
 			}

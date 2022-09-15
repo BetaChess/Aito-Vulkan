@@ -1,5 +1,5 @@
-#ifndef PHM_SIMPLE_RENDER_SYSTEM_H
-#define PHM_SIMPLE_RENDER_SYSTEM_H
+#ifndef AITO_SIMPLE_RENDER_SYSTEM_H
+#define AITO_SIMPLE_RENDER_SYSTEM_H
 
 #include <memory>
 #include <vector>
@@ -37,5 +37,5 @@ namespace aito
 	};
 }
 
-#endif /* PHM_SIMPLE_RENDER_SYSTEM_H */
+#endif /* AITO_SIMPLE_RENDER_SYSTEM_H */
 

@@ -19,6 +19,7 @@ typedef glm::vec<4, Float, glm::packed_highp> Vec4f;
 typedef glm::vec<4, int, glm::packed_highp> Vec4i;
 typedef glm::vec<3, Float, glm::packed_highp> Point3f;
 typedef glm::vec<3, int, glm::packed_highp> Point3i;
+typedef glm::vec<4, Float, glm::packed_highp> Point4f;
 typedef glm::mat<4, 4, Float, glm::packed_highp> Mat4f;
 typedef glm::mat<3, 3, Float, glm::packed_highp> Mat3f;
 

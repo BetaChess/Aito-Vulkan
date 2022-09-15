@@ -1,5 +1,5 @@
-#ifndef PHM_KEYBOARDCONTROLLER_H
-#define PHM_KEYBOARDCONTROLLER_H
+#ifndef AITO_KEYBOARDCONTROLLER_H
+#define AITO_KEYBOARDCONTROLLER_H
 
 #include "object.h"
 #include "window.h"
@@ -34,4 +34,4 @@ namespace aito
 
 
 
-#endif /* PHM_KEYBOARDCONTROLLER_H */
+#endif /* AITO_KEYBOARDCONTROLLER_H */

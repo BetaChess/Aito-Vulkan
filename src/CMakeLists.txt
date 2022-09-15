@@ -22,7 +22,7 @@ set(SOURCES
     "swapchain.h" 
     "window.cpp" 
     "window.h"
- "pch.h" "transform.h" "transform.cpp" "object.h" "shape.h" "shape.cpp" "utils.h" "buffer.cpp" "buffer.h"  "frame_info.h" "keyboardController.cpp" "keyboardController.h" "point_light_system.cpp" "point_light_system.h" "simple_render_system.cpp" "simple_render_system.h" "time.cpp" "time.h" "vecmath.h")
+ "pch.h" "transform.h" "transform.cpp" "object.h" "shape.h" "shape.cpp" "utils.h" "buffer.cpp" "buffer.h"  "frame_info.h" "keyboardController.cpp" "keyboardController.h" "point_light_system.cpp" "point_light_system.h" "simple_render_system.cpp" "simple_render_system.h" "time.cpp" "time.h" "vecmath.h" "bounding_box_render_system.h" "bounding_box_render_system.cpp")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 

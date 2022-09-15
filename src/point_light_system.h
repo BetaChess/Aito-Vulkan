@@ -1,5 +1,5 @@
-#ifndef PHM_POINT_LIGHT_SYSTEM_H
-#define PHM_POINT_LIGHT_SYSTEM_H
+#ifndef AITO_POINT_LIGHT_SYSTEM_H
+#define AITO_POINT_LIGHT_SYSTEM_H
 
 #include <memory>
 #include <vector>
@@ -35,5 +35,5 @@ namespace aito
 	};
 }
 
-#endif /* PHM_POINT_LIGHT_SYSTEM_H */
+#endif /* AITO_POINT_LIGHT_SYSTEM_H */
 

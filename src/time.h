@@ -1,5 +1,5 @@
-#ifndef PHM_TIME_H
-#define PHM_TIME_H
+#ifndef AITO_TIME_H
+#define AITO_TIME_H
 #include <chrono>
 
 class Time
@@ -17,4 +17,4 @@ private:
 };
 
 
-#endif /* PHM_TIME_H */
+#endif /* AITO_TIME_H */

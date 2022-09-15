@@ -1,5 +1,5 @@
-#ifndef PHM_FRAME_INFO_H
-#define PHM_FRAME_INFO_H
+#ifndef AITO_FRAME_INFO_H
+#define AITO_FRAME_INFO_H
 
 #include "camera.h"
 
@@ -18,4 +18,4 @@ namespace aito
 	};
 }
 
-#endif /* PHM_FRAME_INFO_H */
+#endif /* AITO_FRAME_INFO_H */
