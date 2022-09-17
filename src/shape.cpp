@@ -20,7 +20,7 @@ struct hash<aito::Model::Vertex>
 	size_t operator()(const aito::Model::Vertex& vertex) const
 	{
 		size_t seed = 0;
-		aito::hashCombine(seed, vertex.position, vertex.color, vertex.normal, vertex.uv);
+		aito::hashCombine(seed, static_cast<glm::vec3>(vertex.position), vertex.color, vertex.normal, vertex.uv);
 		return seed;
 	}
 };

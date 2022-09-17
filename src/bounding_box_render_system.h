@@ -8,6 +8,7 @@
 #include "pipeline.h"
 #include "object.h"
 #include "frame_info.h"
+#include "bounds.h"
 
 
 namespace aito
@@ -36,6 +37,42 @@ struct BoundingBox
 	};
 
 	BoundingBox(Device& device, std::array<Vertex, 8> corners);
+	template<typename T>
+	BoundingBox(Device& device, Bounds3<T> bounds)
+		: device_(device)
+	{
+		const std::array<BoundingBox::Vertex, 8> vertices =
+		{
+			bounds.corner(0),
+			bounds.corner(1),
+			bounds.corner(2),
+			bounds.corner(3),
+			bounds.corner(4),
+			bounds.corner(5),
+			bounds.corner(6),
+			bounds.corner(7)
+		};
+
+		createBuffers(vertices);
+	}
+	template<typename T>
+	BoundingBox(Device& device, Bounds3<T> bounds, Vec3f color)
+		: device_(device)
+	{
+		const std::array<BoundingBox::Vertex, 8> vertices =
+		{
+			BoundingBox::Vertex(bounds.corner(0), color),
+			BoundingBox::Vertex(bounds.corner(1), color),
+			BoundingBox::Vertex(bounds.corner(2), color),
+			BoundingBox::Vertex(bounds.corner(3), color),
+			BoundingBox::Vertex(bounds.corner(4), color),
+			BoundingBox::Vertex(bounds.corner(5), color),
+			BoundingBox::Vertex(bounds.corner(6), color),
+			BoundingBox::Vertex(bounds.corner(7), color)
+		};
+
+		createBuffers(vertices);
+	}	
 	~BoundingBox();
 
 	BoundingBox(const BoundingBox&) = delete;

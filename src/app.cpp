@@ -9,7 +9,7 @@
 #include "bounding_box_render_system.h"
 #include "time.h"
 
-#include "vecmath.h"
+#include "bounds.h"
 
 #include <stdexcept>
 #include <array>
@@ -83,8 +83,11 @@ namespace aito
 		float currRot = 0;
 
 		// !!!!!!!!!!!!!!!!!!!! TEMP !!!!!!!!!!!!!!!!!!!!!!!!!!
+		Bounds3f boundsa({ -0.5f, 0, -0.5f }, { 0.5f, -0.6f, 0.5f });
+		Bounds3f boundsb({ -1.5f, 0, -1.5f }, { -0.7f, -1, -0.7f });
+
 		std::vector<BoundingBoxObject> boundingBoxes;
-		std::array<BoundingBox::Vertex, 8> vertices = 
+		/*std::array<BoundingBox::Vertex, 8> vertices = 
 		{
 			BoundingBox::Vertex({-0.5f, -0.5f, 0.5f }),
 			BoundingBox::Vertex({ 0.5f, -0.5f, 0.5f }),
@@ -94,13 +97,33 @@ namespace aito
 			BoundingBox::Vertex({0.5f, -0.5f, -0.5f}),
 			BoundingBox::Vertex({-0.5f, 0.5f, -0.5f}),
 			BoundingBox::Vertex({0.5f, 0.5f, -0.5f})
-		};
-		BoundingBoxObject boundingBoxObject;
-		boundingBoxObject.model = std::make_shared<BoundingBox>(device_, vertices);
-		boundingBoxObject.transform.translation = { 0.0f, 0.0f, 0.0f };
-		boundingBoxObject.transform.scale = { 1.0f, 1.0f, 1.0f };
-		boundingBoxObject.transform.rotation = { 0.0f, 0.0f, 0.0f };
-		boundingBoxes.push_back(boundingBoxObject);
+		};*/
+		{
+			BoundingBoxObject boundingBoxObject;
+			boundingBoxObject.model = std::make_shared<BoundingBox>(device_, boundsa);
+			boundingBoxObject.transform.translation = { 0.0f, 0.0f, 0.0f };
+			boundingBoxObject.transform.scale = { 1.0f, 1.0f, 1.0f };
+			boundingBoxObject.transform.rotation = { 0.0f, 0.0f, 0.0f };
+			boundingBoxes.push_back(boundingBoxObject);
+		}
+		{
+			BoundingBoxObject boundingBoxObject;
+			boundingBoxObject.model = std::make_shared<BoundingBox>(device_, boundsb);
+			boundingBoxObject.transform.translation = { 0.0f, 0.0f, 0.0f };
+			boundingBoxObject.transform.scale = { 1.0f, 1.0f, 1.0f };
+			boundingBoxObject.transform.rotation = { 0.0f, 0.0f, 0.0f };
+			boundingBoxes.push_back(boundingBoxObject);
+		}
+		{
+			BoundingBoxObject boundingBoxObject;
+			boundingBoxObject.model = std::make_shared<BoundingBox>(device_, bounds_union(boundsa, boundsb), Vec3f{ 0.0f, 0.0f, 1.0f });
+			boundingBoxObject.transform.translation = { 0.0f, 0.0f, 0.0f };
+			boundingBoxObject.transform.scale = { 1.0f, 1.0f, 1.0f };
+			boundingBoxObject.transform.rotation = { 0.0f, 0.0f, 0.0f };
+			boundingBoxes.push_back(boundingBoxObject);
+		}
+		
+		// !!!!!!!!!!!!!!!!!!!! ^^^^ !!!!!!!!!!!!!!!!!!!!!!!!!!
 
 		while (!window_.shouldClose())
 		{
