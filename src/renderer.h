@@ -24,6 +24,8 @@ namespace aito
 		inline bool isFrameInProgress() const { return isFrameStarted_; };
 		inline float getAspectRatio() const { return swapchain_->extentAspectRatio(); };
 
+		void populateImGui_initInfo(ImGui_ImplVulkan_InitInfo& init_info);
+
 		inline VkCommandBuffer getCurrentCommandBuffer() const 
 		{ 
 			assert(isFrameStarted_ && "Tried to retrieve command buffer before a frame draw was initialised");

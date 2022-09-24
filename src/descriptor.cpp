@@ -113,6 +113,11 @@ namespace aito
         vkDestroyDescriptorPool(device_.device(), descriptorPool_, nullptr);
     }
 
+    void DescriptorPool::populateImGui_initInfo(ImGui_ImplVulkan_InitInfo& init_info)
+    {
+        init_info.DescriptorPool = descriptorPool_;
+    }
+
     bool DescriptorPool::allocateDescriptorSet(
         const VkDescriptorSetLayout descriptorSetLayout, VkDescriptorSet& descriptor) const
     {
@@ -124,7 +129,8 @@ namespace aito
 
         // Might want to create a "DescriptorPoolManager" class that handles this case, and builds
         // a new pool whenever an old pool fills up. But this is beyond our current scope
-        if (vkAllocateDescriptorSets(device_.device(), &allocInfo, &descriptor) != VK_SUCCESS)
+		auto retCode = vkAllocateDescriptorSets(device_.device(), &allocInfo, &descriptor);
+        if (retCode != VK_SUCCESS)
         {
             return false;
         }

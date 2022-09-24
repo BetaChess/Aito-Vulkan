@@ -10,6 +10,9 @@
 #include "descriptor.h"
 
 
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_vulkan.h"
+
 namespace aito
 {
 	class Application
@@ -27,10 +30,15 @@ namespace aito
 
 		void run();
 
+		void render_ui();
+
 	private:
 		Window window_{ WIDTH, HEIGHT, "3D" };
 		Device device_{ window_ };
 		Renderer renderer_{ window_, device_ };
+
+		ImGuiContext* imgui_context_;
+		ImGuiIO& io_;
 
 		std::unique_ptr<DescriptorPool> globalPool_{};
 		std::vector<Object> objects_; // TEMP

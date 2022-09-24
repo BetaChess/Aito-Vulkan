@@ -76,6 +76,8 @@ namespace aito
 		DescriptorPool(const DescriptorPool&) = delete;
 		DescriptorPool& operator=(const DescriptorPool&) = delete;
 
+		void populateImGui_initInfo(ImGui_ImplVulkan_InitInfo& init_info);
+
 		bool allocateDescriptorSet(
 			const VkDescriptorSetLayout descriptorSetLayout, VkDescriptorSet& descriptor) const;
 

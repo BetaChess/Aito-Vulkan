@@ -315,6 +315,8 @@ namespace aito
 			throw std::runtime_error("failed to create logical device!");
 		}
 
+		queueFamilyIndices_ = indices;
+
 		// Set the graphics queue
 		vkGetDeviceQueue(device_, indices.graphicsFamily.value(), 0, &graphicsQueue_);
 		// Set the presentation queue
@@ -665,6 +667,22 @@ namespace aito
 			}
 		}
 		throw std::runtime_error("failed to find supported format!");
+	}
+
+	void Device::populateImGui_initInfo(ImGui_ImplVulkan_InitInfo& init_info)
+	{
+		init_info.Instance = instance_;
+		init_info.PhysicalDevice = physicalDevice_;
+		init_info.Device = device_;
+		init_info.QueueFamily = queueFamilyIndices_.graphicsFamily.value();
+		init_info.Queue = graphicsQueue_;
+		init_info.PipelineCache = VK_NULL_HANDLE;
+		//init_info.DescriptorPool = g_DescriptorPool;
+		init_info.Subpass = 0;
+		init_info.MinImageCount = 2;
+		init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
+		init_info.Allocator = nullptr;
+		init_info.CheckVkResultFn = nullptr;
 	}
 
 	/// <summary>

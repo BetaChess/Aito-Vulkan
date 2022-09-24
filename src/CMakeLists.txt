@@ -1,7 +1,10 @@
 ﻿
 project ("Aito_Vulkan")
 
+message(${IMGUI_SOURCES})
+
 set(SOURCES
+    ${IMGUI_SOURCES}
 	"main.cpp"
     "aito.h"
     "logger.h"
@@ -22,7 +25,28 @@ set(SOURCES
     "swapchain.h" 
     "window.cpp" 
     "window.h"
- "pch.h" "transform.h" "transform.cpp" "object.h" "shape.h" "shape.cpp" "utils.h" "buffer.cpp" "buffer.h"  "frame_info.h" "keyboardController.cpp" "keyboardController.h" "point_light_system.cpp" "point_light_system.h" "simple_render_system.cpp" "simple_render_system.h" "time.cpp" "time.h" "vecmath.h" "bounding_box_render_system.h" "bounding_box_render_system.cpp" "bounds.h")
+    "pch.h" 
+    "transform.h" 
+    "transform.cpp" 
+    "object.h" 
+    "shape.h" 
+    "shape.cpp" 
+    "utils.h" 
+    "buffer.cpp" 
+    "buffer.h"  
+    "frame_info.h" 
+    "keyboardController.cpp" 
+    "keyboardController.h" 
+    "point_light_system.cpp" 
+    "point_light_system.h" 
+    "simple_render_system.cpp" 
+    "simple_render_system.h" 
+    "time.cpp" 
+    "time.h" 
+    "vecmath.h" 
+    "bounding_box_render_system.h" 
+    "bounding_box_render_system.cpp"
+    "bounds.h")
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
@@ -39,7 +63,11 @@ target_include_directories(${PROJECT_NAME}
 	PUBLIC ../vendor/spdlog/include
     PUBLIC ../vendor/glm
     PUBLIC ../vendor/tinyobjloader/
+    PUBLIC ../vendor/imgui/
+	PUBLIC ../vendor/imgui/backends/
 )
+
+message(${IMGUI_DIR}/backends)
 
 target_link_directories(${PROJECT_NAME}
 	PRIVATE ../vendor/glfw/src
@@ -50,6 +78,8 @@ target_link_libraries(${PROJECT_NAME}
 	glfw
     vulkan-1
 )
+
+target_compile_definitions(${PROJECT_NAME} PUBLIC -DImTextureID=ImU64)
 
 # Command to copy models to output folder
 add_custom_command(

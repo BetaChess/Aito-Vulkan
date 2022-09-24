@@ -22,6 +22,11 @@ namespace aito
 		freeCommandBuffers();
 	}
 
+	void Renderer::populateImGui_initInfo(ImGui_ImplVulkan_InitInfo& init_info)
+	{
+		init_info.ImageCount = Swapchain::MAX_FRAMES_IN_FLIGHT;
+	}
+
 	void Renderer::recreateSwapchain()
 	{
 		auto extent = window_.getExtent();
